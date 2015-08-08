@@ -1,0 +1,9 @@
+./**/.svn
+./**/.DS_Store
+*.iml
+.classpath
+.idea
+.project
+.settings
+.svn
+target

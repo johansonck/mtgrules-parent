@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- Bean declarations go here -->
+    <bean id="rulesReader" class="java.io.InputStreamReader">
+        <constructor-arg value="classpath:/MagicCompRules_20150327.txt" type="java.io.InputStream"/>
+        <constructor-arg value="windows-1252" type="java.lang.String"/>
+    </bean>
+
+    <bean id="rulesParser" class="be.sonck.mtg.rules.impl.service.RulesParser">
+        <constructor-arg ref="rulesReader"/>
+    </bean>
+
+</beans>

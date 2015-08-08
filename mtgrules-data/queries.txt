@@ -1,0 +1,10 @@
+naam:
+http://gatherer.wizards.com/Pages/Search/Default.aspx?name=+[twiddle]
+
+set:
+http://gatherer.wizards.com/Pages/Search/Default.aspx?set=[%22Dragons%20of%20Tarkir%22]
+
+set + kleur:
+http://gatherer.wizards.com/Pages/Search/Default.aspx?color=|[W]|[U]&set=[%22Alliances%22]
+(witte en/of blauwe kaarten uit Alliances)
+

@@ -17,6 +17,8 @@
 
     <modules>
         <module>mtgrules-data</module>
+        <module>mtgrules-service</module>
+        <module>mtgrules-rest</module>
     </modules>
 
     <build>

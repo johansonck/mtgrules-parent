@@ -1,4 +1,4 @@
-package be.sonck.mtg.rules.impl.service;
+package be.sonck.mtg.rules.data.impl.service;
 
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
@@ -32,7 +32,7 @@ public class LineReaderTest {
 
     @Test
     public void test() throws IOException, InterruptedException {
-        InputStreamReaderStub stub = new InputStreamReaderStub(new ClassPathResource("/be/sonck/mtg/rules/LineReaderTestInput.txt").getInputStream());
+        InputStreamReaderStub stub = new InputStreamReaderStub(new ClassPathResource("/be/sonck/mtg/rules/data/LineReaderTestInput.txt").getInputStream());
 
         try (LineReader lineReader = new LineReader(stub)) {
             Iterator<String> iterator = lineReader.iterator();

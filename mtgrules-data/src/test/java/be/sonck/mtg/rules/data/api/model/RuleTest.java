@@ -1,4 +1,4 @@
-package be.sonck.mtg.rules.api.model;
+package be.sonck.mtg.rules.data.api.model;
 
 import org.junit.Test;
 

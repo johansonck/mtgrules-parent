@@ -1,4 +1,4 @@
-package be.sonck.mtg.rules.impl.service;
+package be.sonck.mtg.rules.data.impl.service;
 
 import org.junit.Test;
 

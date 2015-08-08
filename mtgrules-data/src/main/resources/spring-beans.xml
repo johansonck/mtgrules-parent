@@ -8,7 +8,7 @@
         <constructor-arg value="windows-1252" type="java.lang.String"/>
     </bean>
 
-    <bean id="rulesParser" class="be.sonck.mtg.rules.impl.service.RulesParser">
+    <bean id="rulesParser" class="be.sonck.mtg.rules.data.impl.service.RulesParser">
         <constructor-arg ref="rulesReader"/>
     </bean>
 

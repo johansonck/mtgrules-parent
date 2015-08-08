@@ -1,6 +1,6 @@
-package be.sonck.mtg.rules.impl.service;
+package be.sonck.mtg.rules.data.impl.service;
 
-import be.sonck.mtg.rules.api.model.Rule;
+import be.sonck.mtg.rules.data.api.model.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

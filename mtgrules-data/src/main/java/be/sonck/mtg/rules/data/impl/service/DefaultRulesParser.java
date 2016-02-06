@@ -12,7 +12,7 @@ import static org.apache.commons.lang.StringUtils.isEmpty;
 /**
  * Created by johansonck on 12/07/15.
  */
-@Component
+@Component("rulesParser")
 public class DefaultRulesParser implements RulesParser {
 
     private static final String GLOSSARY = "Glossary";

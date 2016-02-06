@@ -1,5 +1,7 @@
 package be.sonck.mtg.rules.data.impl.service;
 
+import com.google.common.collect.ImmutableMap;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,6 +18,8 @@ public class HashMapBuilder<K, V> {
 
     public HashMapBuilder<K, V> entry(K key, V value) {
         map.put(key, value);
+
+        ImmutableMap.<String, String>builder().put("test", "test").build();
 
         return this;
     }

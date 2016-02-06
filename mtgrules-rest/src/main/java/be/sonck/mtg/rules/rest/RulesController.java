@@ -1,22 +1,22 @@
 package be.sonck.mtg.rules.rest;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import be.sonck.mtg.rules.data.api.service.RulesRepository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by johansonck on 09/08/15.
  */
-@Controller
-@RequestMapping("/rules")
+@RestController
 public class RulesController {
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getRule(@PathVariable String ruleId, ModelMap model) {
+    RulesRepository rulesRepository;
 
-        model.addAttribute("movie", ruleId);
-        return "list";
+    @RequestMapping("/rules/{id}")
+    public String getRule(@PathVariable String id) {
+        rulesRepository.getRule(id);
+
+        return id;
     }
 }

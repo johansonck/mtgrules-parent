@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 /**
  * Created by johansonck on 12/07/15.
  */
-public class RulesParserTest {
+public class DefaultRulesParserTest {
 
     private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/spring-beans.xml");
 
@@ -36,12 +36,22 @@ public class RulesParserTest {
         Iterator<String> keyIterator = keys.iterator();
 
         assertTrue(keyIterator.hasNext());
-        validate(map, keyIterator.next(), "1.", "Game Concepts");
+        validate(map, keyIterator.next(), "1", "Game Concepts");
 
         assertTrue(keyIterator.hasNext());
-        validate(map, keyIterator.next(), "100.", "General");
+        validate(map, keyIterator.next(), "100", "General");
 
-        validate(map, Iterators.getLast(keyIterator), "905.6.", "Once the starting player has been determined, each player sets his or her life total to 20 and draws a hand of seven cards.");
+        assertThat(map.get("205.3i"), is("Lands have their own unique set of subtypes; these subtypes are called land types. The land " +
+                "types are Desert, Forest, Gate, Island, Lair, Locus, Mine, Mountain, Plains, Power-Plant, Swamp, Tower, " +
+                "and Urza’s. Of that list, Forest, Island, Mountain, Plains, and Swamp are the basic land types. See rule 305.6."));
+
+        assertThat(map.get("903.5c"), is("A card can be included in a Commander deck only if every color in its color identity is also " +
+                "found in the color identity of the deck’s commander. Example: Wort, the Raidmother is a legendary creature with mana " +
+                "cost {4}{R/G}{R/G}. Wort’s color identity is red and green. Each card in a Wort Commander deck must be only red, only " +
+                "green, both red and green, or have no color. Each mana symbol in the mana cost or rules text of a card in this deck " +
+                "must be only red, only green, both red and green, or have no color."));
+
+        validate(map, Iterators.getLast(keyIterator), "905.6", "Once the starting player has been determined, each player sets his or her life total to 20 and draws a hand of seven cards.");
     }
 
     @Test

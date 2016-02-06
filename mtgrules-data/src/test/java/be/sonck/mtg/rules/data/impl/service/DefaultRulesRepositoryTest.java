@@ -1,10 +1,11 @@
 package be.sonck.mtg.rules.data.impl.service;
 
 import be.sonck.mtg.rules.data.api.model.Rule;
+import be.sonck.mtg.rules.data.api.service.RulesRepository;
+import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Collection;
@@ -15,12 +16,13 @@ import java.util.Optional;
 import static org.apache.commons.collections.CollectionUtils.isEmpty;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by johansonck on 14/07/15.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class RulesRepositoryTest {
+public class DefaultRulesRepositoryTest {
 
     private static final String RULE_1 = "rule1";
     private static final String RULE_2 = "rule2";
@@ -34,45 +36,46 @@ public class RulesRepositoryTest {
     @Mock
     private RulesParser rulesParser;
 
+
     @Test
     public void getRule() {
         expectGetRules();
 
-        validateRule(repository().getRule("1."), RULE_1);
-        validateRule(repository().getRule("2."), RULE_2);
+        validateRule(repository().getRule("1"), RULE_1);
+        validateRule(repository().getRule("2"), RULE_2);
     }
 
     @Test
     public void getRuleWithChildren() {
         expectGetRules();
 
-        Collection<Rule> children = repository().getRule("1.").get().getChildren();
+        Collection<Rule> children = repository().getRule("1").get().getChildren();
         assertFalse(isEmpty(children));
         assertThat(children.size(), is(2));
 
         Iterator<Rule> ruleIterator = children.iterator();
 
-        validateRule(ruleIterator.next(), "100.", RULE_100);
-        validateRule(ruleIterator.next(), "101.", RULE_101);
+        validateRule(ruleIterator.next(), "100", RULE_100);
+        validateRule(ruleIterator.next(), "101", RULE_101);
     }
 
     @Test
     public void getRuleWithGrandChildren() {
         expectGetRules();
 
-        Collection<Rule> grandChildren = repository().getRule("1.").get().getChildren().iterator().next().getChildren();
+        Collection<Rule> grandChildren = repository().getRule("1").get().getChildren().iterator().next().getChildren();
 
         Iterator<Rule> ruleIterator = grandChildren.iterator();
 
-        validateRule(ruleIterator.next(), "100.1.", RULE_100_1);
-        validateRule(ruleIterator.next(), "100.2.", RULE_100_2);
+        validateRule(ruleIterator.next(), "100.1", RULE_100_1);
+        validateRule(ruleIterator.next(), "100.2", RULE_100_2);
     }
 
     @Test
     public void getRuleWithGrandGrandChildren() {
         expectGetRules();
 
-        Collection<Rule> grandGrandChildren = repository().getRule("1.").get().getChildren().iterator().next().getChildren().iterator().next().getChildren();
+        Collection<Rule> grandGrandChildren = repository().getRule("1").get().getChildren().iterator().next().getChildren().iterator().next().getChildren();
 
         Iterator<Rule> ruleIterator = grandGrandChildren.iterator();
 
@@ -88,22 +91,22 @@ public class RulesRepositoryTest {
     }
 
     private void expectGetRules() {
-        Map<String, String> rules = new StringHashMapBuilder()
-                .entry("1.", RULE_1)
-                .entry("100.", RULE_100)
-                .entry("100.1.", RULE_100_1)
-                .entry("100.1a", RULE_100_1A)
-                .entry("100.1b", RULE_100_1B)
-                .entry("100.2.", RULE_100_2)
-                .entry("101.", RULE_101)
-                .entry("2.", RULE_2)
+        Map<String, String> rules = ImmutableMap.<String, String>builder()
+                .put("1", RULE_1)
+                .put("100", RULE_100)
+                .put("100.1", RULE_100_1)
+                .put("100.1a", RULE_100_1A)
+                .put("100.1b", RULE_100_1B)
+                .put("100.2", RULE_100_2)
+                .put("101", RULE_101)
+                .put("2", RULE_2)
                 .build();
 
         expectGetRules(rules);
     }
 
     private void expectGetRules(Map<String, String> map) {
-        Mockito.when(rulesParser.getRules()).thenReturn(map);
+        when(rulesParser.getRules()).thenReturn(map);
     }
 
     private void validateRule(Optional<Rule> optionalRule, String ruleText) {
@@ -118,6 +121,6 @@ public class RulesRepositoryTest {
     }
 
     private RulesRepository repository() {
-        return new RulesRepository(rulesParser);
+        return new DefaultRulesRepository(rulesParser);
     }
 }

@@ -1,6 +1,9 @@
 package be.sonck.mtg.rules.data.impl.service;
 
 import be.sonck.mtg.rules.data.api.model.Rule;
+import be.sonck.mtg.rules.data.api.service.RulesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,17 +12,19 @@ import java.util.Optional;
 /**
  * Created by johansonck on 14/07/15.
  */
-public class RulesRepository {
+@Component("rulesRepository")
+public class DefaultRulesRepository implements RulesRepository {
 
     private final RuleIdInterpreter ruleIdInterpreter = new RuleIdInterpreter();
     private final Map<String, Rule> rules = new HashMap<>();
 
 
-    public RulesRepository(RulesParser rulesParser) {
+    @Autowired
+    public DefaultRulesRepository(RulesParser rulesParser) {
         initialize(rulesParser);
     }
 
-    public Optional<Rule> getRule(String ruleId) {
+    @Override public Optional<Rule> getRule(String ruleId) {
         return Optional.ofNullable(rules.get(ruleId));
     }
 

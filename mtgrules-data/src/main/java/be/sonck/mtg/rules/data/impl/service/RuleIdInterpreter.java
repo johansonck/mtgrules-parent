@@ -13,8 +13,8 @@ public class RuleIdInterpreter {
     // ^\d{3}\.$
     // ^\d{3}\.\d\.$
     // ^\d{3}\.\d[a-z]$
-    private static String LEVEL2_PATTERN = "^\\d{3}\\.$";
-    private static String LEVEL3_PATTERN = "^\\d{3}\\.\\d\\.$";
+    private static String LEVEL2_PATTERN = "^\\d{3}$";
+    private static String LEVEL3_PATTERN = "^\\d{3}\\.\\d$";
     private static String LEVEL4_PATTERN = "^\\d{3}\\.\\d[a-z]$";
 
     // 1.
@@ -37,15 +37,15 @@ public class RuleIdInterpreter {
     }
 
     private String toLevel1(String ruleId) {
-        return ruleId.substring(0, 1) + ".";
+        return ruleId.substring(0, 1);
     }
 
     private String toLevel2(String ruleId) {
-        return ruleId.substring(0, 4);
+        return ruleId.substring(0, 3);
     }
 
     private String toLevel3(String ruleId) {
-        return ruleId.substring(0, ruleId.length() - 1) + ".";
+        return ruleId.substring(0, ruleId.length() - 1);
     }
 
     private boolean isLevel2(String ruleId) {

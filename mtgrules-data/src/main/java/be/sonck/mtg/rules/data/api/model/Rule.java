@@ -61,4 +61,9 @@ public class Rule {
     void addChild(Rule child) {
         children.add(child);
     }
+
+    @Override
+    public String toString() {
+        return getId() + " - " + getText();
+    }
 }

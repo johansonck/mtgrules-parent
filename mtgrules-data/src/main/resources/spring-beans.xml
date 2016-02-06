@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <context:component-scan base-package="be.sonck"/>
+    <aop:aspectj-autoproxy/>
 
     <!-- Bean declarations go here -->
     <bean id="rulesReader" class="java.io.InputStreamReader">
         <constructor-arg value="classpath:/MagicCompRules_20150327.txt" type="java.io.InputStream"/>
         <constructor-arg value="windows-1252" type="java.lang.String"/>
-    </bean>
-
-    <bean id="rulesParser" class="be.sonck.mtg.rules.data.impl.service.RulesParser">
-        <constructor-arg ref="rulesReader"/>
     </bean>
 
 </beans>
